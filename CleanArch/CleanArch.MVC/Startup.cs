@@ -1,3 +1,4 @@
+using CleanArch.Infra.Data.Context;
 using CleanArch.MVC.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -34,6 +35,14 @@ namespace CleanArch.MVC
 			services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
 				.AddEntityFrameworkStores<ApplicationDbContext>();
 			services.AddRazorPages();
+
+			services.AddDbContext<UniversityDBContext>(options =>
+			{
+				options.UseSqlServer(Configuration.GetConnectionString("UniversityDBConnection"));
+			});
+
+
+
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
