@@ -1,4 +1,5 @@
 using CleanArch.Infra.Data.Context;
+using CleanArch.Infra.IoC;
 using CleanArch.MVC.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -41,7 +42,7 @@ namespace CleanArch.MVC
 				options.UseSqlServer(Configuration.GetConnectionString("UniversityDBConnection"));
 			});
 
-
+			RegisterServices(services);
 
 		}
 
@@ -72,6 +73,11 @@ namespace CleanArch.MVC
 			{
 				endpoints.MapRazorPages();
 			});
+		}
+
+		private static void RegisterServices(IServiceCollection services)
+		{
+			DependencyContainer.RegisterServices(services);
 		}
 	}
 }
